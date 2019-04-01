@@ -7,18 +7,15 @@ namespace console_library
   {
     static void Main(string[] args)
     {
+      Library myLibrary = new Library("Jason's Library");
       Book wtse = new Book("Where the Sidewalk Ends", "Shel Silverstien");
       Book lotr = new Book("Lord of the Rings", "JRR Tolkien");
-      Library myLibrary = new Library("Jason's Library");
       Book tbk = new Book("The Brothers Karamazov", "Fyodor Dostoyevsky");
       Book fwtbt = new Book("For Whom the Bell Tolls", "Ernest Hemingway");
       Book tspe = new Book("The Three Stigmata of Palmer Eldritch", "Philip K. Dick");
       Book md = new Book("Moby Dick", "Herman Melville");
       Book pf = new Book("Pale Fire", "Vladmir Nabokov");
       Book gr = new Book("Gravity's Rainbow", "Thomas Pynchon");
-
-      Console.Clear();
-      Console.WriteLine($"Welcome to {myLibrary.Name}.");
 
       myLibrary.AddBook(wtse);
       myLibrary.AddBook(lotr);
@@ -29,7 +26,12 @@ namespace console_library
       myLibrary.AddBook(md);
       myLibrary.AddBook(gr);
 
+      Console.Clear();
+      Console.WriteLine($"Welcome to {myLibrary.Name}.");
       myLibrary.PrintBooks();
+      Console.WriteLine("Select a number to check out the book (Q)uit or (R)eturn a book");
+      string selection = Console.ReadLine();
+      myLibrary.Checkout(selection);
     }
   }
 }
