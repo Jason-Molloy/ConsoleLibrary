@@ -1,16 +1,14 @@
 namespace console_library.Models
 {
-  public class Book
+  class Book : Borrowable
   {
     public string Title { get; set; }
     public string Author { get; set; }
-    public bool Available { get; set; }
 
-    public Book(string title, string author)
+    public Book(string title, string author, string id, bool available) : base(id)
     {
       Title = title;
       Author = author;
-      Available = true;
     }
   }
 }
