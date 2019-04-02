@@ -27,22 +27,62 @@ namespace console_library
       myLibrary.AddBook(md);
       myLibrary.AddBook(gr);
 
+      Enum activeMenu = Menus.CheckoutBook;
+
       Console.Clear();
       Console.WriteLine($"Welcome to {myLibrary.Name}.");
+      Console.WriteLine("Would you like to check out a book from our (A)vailable books, (R)eturn a book? Q to quit.");
       while (inLibrary)
       {
-        myLibrary.PrintBooks();
-        Console.WriteLine("Select a number to check out the book (Q)uit or (R)eturn a book");
+        switch (activeMenu)
+        {
+          case Menus.CheckoutBook:
+            myLibrary.PrintBooks();
+            break;
+          case Menus.ReturnBook:
+            myLibrary.PrintCheckedOut();
+            break;
+        }
         string selection = Console.ReadLine().ToLower();
-        if (selection == "q")
+        switch (selection)
         {
-          inLibrary = false;
+          case "r":
+            Console.Clear();
+            activeMenu = Menus.ReturnBook;
+            break;
+          case "a":
+            Console.Clear();
+            activeMenu = Menus.CheckoutBook;
+            break;
+          case "q":
+            Console.Clear();
+            inLibrary = false;
+            break;
+          default:
+            if (activeMenu.Equals(Menus.CheckoutBook))
+            {
+              myLibrary.Checkout(selection);
+            }
+            else
+            {
+              myLibrary.Return(selection);
+            }
+            break;
         }
-        else
-        {
-          myLibrary.Checkout(selection);
-        }
+        // if (selection == "q")
+        // {
+        //   inLibrary = false;
+        // }
+        // else
+        // {
+        //   myLibrary.Checkout(selection);
+        // }
       }
+    }
+    public enum Menus
+    {
+      CheckoutBook,
+      ReturnBook
     }
   }
 }
