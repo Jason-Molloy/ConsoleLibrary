@@ -24,7 +24,7 @@ namespace console_library.Models
 
     public void PrintCheckedOut()
     {
-      for (int i = 0; i < Books.Count; i++)
+      for (int i = 0; i < CheckedOut.Count; i++)
       {
         System.Console.WriteLine($"{i + 1}) {CheckedOut[i].Title} by {CheckedOut[i].Author} -- Status: {(CheckedOut[i].Available ? "Available" : "Checked Out")}");
       }
