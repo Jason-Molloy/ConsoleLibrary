@@ -7,6 +7,7 @@ namespace console_library
   {
     static void Main(string[] args)
     {
+      bool inLibrary = true;
       Library myLibrary = new Library("Jason's Library");
       Book wtse = new Book("Where the Sidewalk Ends", "Shel Silverstien");
       Book lotr = new Book("Lord of the Rings", "JRR Tolkien");
@@ -28,10 +29,20 @@ namespace console_library
 
       Console.Clear();
       Console.WriteLine($"Welcome to {myLibrary.Name}.");
-      myLibrary.PrintBooks();
-      Console.WriteLine("Select a number to check out the book (Q)uit or (R)eturn a book");
-      string selection = Console.ReadLine();
-      myLibrary.Checkout(selection);
+      while (inLibrary)
+      {
+        myLibrary.PrintBooks();
+        Console.WriteLine("Select a number to check out the book (Q)uit or (R)eturn a book");
+        string selection = Console.ReadLine().ToLower();
+        if (selection == "q")
+        {
+          inLibrary = false;
+        }
+        else
+        {
+          myLibrary.Checkout(selection);
+        }
+      }
     }
   }
 }
