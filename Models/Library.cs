@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace console_library.Models
@@ -21,11 +22,36 @@ namespace console_library.Models
       }
     }
 
-    public void Checkout(Book)
+    public void Checkout(string selection)
     {
-
+      Book selectedBook = ValidateBook(selection, Books);
+      {
+        if (selectedBook == null)
+        {
+          Console.Clear();
+          System.Console.WriteLine(@"Invalid Selection");
+          return;
+        }
+        else
+        {
+          selectedBook.Available = false;
+          CheckedOut.Add(selectedBook);
+          Books.Remove(selectedBook);
+          System.Console.WriteLine("Sucessfully checked out the book.");
+        }
+      }
     }
 
+    private Book ValidateBook(string selection, List<Book> bookList)
+    {
+      int bookIndex;
+      bool valid = Int32.TryParse(selection, out bookIndex);
+      if (!valid || bookIndex < 0 || bookIndex > bookList.Count)
+      {
+        return null;
+      }
+      return bookList[bookIndex - 1];
+    }
     public Library(string name)
     {
       Name = name;
